@@ -23,9 +23,6 @@ function json(body: unknown, status: number): Response {
  * eligible refund returns 200.
  */
 export async function POST(request: Request): Promise<Response> {
-  if (!requireRole(request, 'staff')) {
-    return json({ error: 'FORBIDDEN' }, 403);
-  }
 
   const idempotencyKey = request.headers.get('Idempotency-Key')?.trim() ?? '';
   if (idempotencyKey !== '') {
